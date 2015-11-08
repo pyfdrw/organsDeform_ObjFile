@@ -8,6 +8,8 @@ int main()
 	NameRefvol namevol;
 	storeNameRefvol(WORKDIR , namevol);
 
+	NameRefvolEdit(namevol);
+
 	deformFunction(WORKDIR, namevol);
 
 	return 1;

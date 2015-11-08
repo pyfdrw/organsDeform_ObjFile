@@ -1,48 +1,9 @@
-﻿生成启动时间为 2015/10/24 16:49:33。
-     1>项目“E:\MyOriginalCodes\organsDeform\organsDeform.vcxproj”在节点 2 上(Build 个目标)。
-     1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"Debug\\" /Fd"Debug\vc140.pdb" /Gd /TP /analyze- /errorReport:prompt function.cpp main.cpp mydata.cpp
-         function.cpp
-     1>e:\myoriginalcodes\organsdeform\function.cpp(43): warning C4996: 'sscanf': This function or variable may be unsafe. Consider using sscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-         c:\program files (x86)\windows kits\10\include\10.0.10150.0\ucrt\stdio.h(2254): note: 参见“sscanf”的声明
-     1>e:\myoriginalcodes\organsdeform\function.cpp(97): warning C4244: “初始化”: 从“std::streamoff”转换到“int”，可能丢失数据
-     1>e:\myoriginalcodes\organsdeform\function.cpp(105): warning C4996: 'sscanf': This function or variable may be unsafe. Consider using sscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-         c:\program files (x86)\windows kits\10\include\10.0.10150.0\ucrt\stdio.h(2254): note: 参见“sscanf”的声明
-     1>e:\myoriginalcodes\organsdeform\function.cpp(112): warning C4996: 'sscanf': This function or variable may be unsafe. Consider using sscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-         c:\program files (x86)\windows kits\10\include\10.0.10150.0\ucrt\stdio.h(2254): note: 参见“sscanf”的声明
-     1>e:\myoriginalcodes\organsdeform\function.cpp(119): warning C4996: 'sscanf': This function or variable may be unsafe. Consider using sscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-         c:\program files (x86)\windows kits\10\include\10.0.10150.0\ucrt\stdio.h(2254): note: 参见“sscanf”的声明
-     1>e:\myoriginalcodes\organsdeform\function.cpp(149): warning C4018: “<”: 有符号/无符号不匹配
-     1>e:\myoriginalcodes\organsdeform\function.cpp(182): warning C4018: “<”: 有符号/无符号不匹配
-     1>e:\myoriginalcodes\organsdeform\function.cpp(192): warning C4244: “初始化”: 从“double”转换到“float”，可能丢失数据
-     1>e:\myoriginalcodes\organsdeform\function.cpp(195): warning C4305: “参数”: 从“double”到“float”截断
-     1>e:\myoriginalcodes\organsdeform\function.cpp(196): warning C4244: “初始化”: 从“double”转换到“float”，可能丢失数据
-     1>e:\myoriginalcodes\organsdeform\function.cpp(202): warning C4305: “参数”: 从“double”到“float”截断
-     1>e:\myoriginalcodes\organsdeform\function.cpp(213): warning C4244: “初始化”: 从“double”转换到“float”，可能丢失数据
-     1>e:\myoriginalcodes\organsdeform\function.cpp(239): warning C4244: “初始化”: 从“double”转换到“float”，可能丢失数据
-     1>e:\myoriginalcodes\organsdeform\function.cpp(277): warning C4018: “<=”: 有符号/无符号不匹配
-     1>e:\myoriginalcodes\organsdeform\function.cpp(284): warning C4018: “<=”: 有符号/无符号不匹配
-     1>e:\myoriginalcodes\organsdeform\function.cpp(291): warning C4018: “<”: 有符号/无符号不匹配
-         正在生成代码...
-         正在编译...
-         mydata.cpp
-     1>e:\myoriginalcodes\organsdeform\mydata.cpp(96): warning C4018: “<=”: 有符号/无符号不匹配
-     1>e:\myoriginalcodes\organsdeform\mydata.cpp(103): warning C4018: “<=”: 有符号/无符号不匹配
-     1>e:\myoriginalcodes\organsdeform\mydata.cpp(110): warning C4018: “<”: 有符号/无符号不匹配
-     1>e:\myoriginalcodes\organsdeform\mydata.cpp(165): warning C4018: “<”: 有符号/无符号不匹配
-     1>e:\myoriginalcodes\organsdeform\mydata.cpp(186): warning C4018: “<”: 有符号/无符号不匹配
-     1>e:\myoriginalcodes\organsdeform\mydata.cpp(204): warning C4244: “+=”: 从“double”转换到“float”，可能丢失数据
-     1>e:\myoriginalcodes\organsdeform\mydata.cpp(222): warning C4018: “<=”: 有符号/无符号不匹配
-     1>e:\myoriginalcodes\organsdeform\mydata.cpp(234): warning C4018: “<=”: 有符号/无符号不匹配
-         main.cpp
-         正在生成代码...
-       Link:
-         C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"E:\MyOriginalCodes\organsDeform\Debug\organsDeform.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /Debug /PDB:"E:\MyOriginalCodes\organsDeform\Debug\organsDeform.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"E:\MyOriginalCodes\organsDeform\Debug\organsDeform.lib" /MACHINE:X86 Debug\mydata.obj
-         Debug\function.obj
-         Debug\main.obj
-         organsDeform.vcxproj -> E:\MyOriginalCodes\organsDeform\Debug\organsDeform.exe
-     1>已完成生成项目“E:\MyOriginalCodes\organsDeform\organsDeform.vcxproj”(Build 个目标)的操作。
+﻿生成启动时间为 2015/11/3 9:57:17。
+     1>项目“E:\MyOriginalCodes\GITProjects\organsDeform_ObjFile\organsDeform.vcxproj”在节点 2 上(Build 个目标)。
+     1>Link:
+         organsDeform.vcxproj -> E:\MyOriginalCodes\GITProjects\organsDeform_ObjFile\Debug\organsDeform.exe
+     1>已完成生成项目“E:\MyOriginalCodes\GITProjects\organsDeform_ObjFile\organsDeform.vcxproj”(Build 个目标)的操作。
 
 已成功生成。
 
-已用时间 00:00:03.02
+已用时间 00:00:00.06

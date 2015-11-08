@@ -52,11 +52,102 @@ void storeNameRefvol(string WORKDIR, NameRefvol &namevol) {
 //有内容物器官的变形参考体积需要加上内容物，本函数是自动处理这些问题
 void NameRefvolEdit(NameRefvol &namerefvol)
 {
-	
+	float *vol = new float[500];
+	for (int i = 0; i < 500; i++) 
+		*(vol + i) = 0;
 
+	for (int i = 0; i < namerefvol.organcount; i++)
+	{
+		*(vol + *(namerefvol.name + i)) = *(namerefvol.vol + i);
+	}
+
+	// 含有内容物组织表面网格参考体积重新计算
+	for (int i = 0; i < 500; i++)
+	{
+		if (13 == i)
+			*(vol + 13) = *(vol + 13) + *(vol + 14) + *(vol + 15);
+		else if (16 == i)
+			*(vol + 16) = *(vol + 16) + *(vol + 17) + *(vol + 18);
+		else if (19 == i)
+			*(vol + 19) = *(vol + 19) + *(vol + 20) + *(vol + 21);
+		else if (22 == i)
+			*(vol + 22) = *(vol + 22) + *(vol + 23);
+		else if (24 == i)
+			*(vol + 24) = *(vol + 24) + *(vol + 25);
+		else if (26 == i)
+			*(vol + 26) = *(vol + 26) + *(vol + 27);
+		else if (28 == i)
+			*(vol + 28) = *(vol + 28) + *(vol + 29) + *(vol + 30);
+		else if (31 == i)
+			*(vol + 31) = *(vol + 31) + *(vol + 32) + *(vol + 33);
+		else if (34 == i)
+			*(vol + 34) = *(vol + 34) + *(vol + 35) + *(vol + 36);
+		else if (37 == i)
+			*(vol + 37) = *(vol + 37) + *(vol + 38);
+		else if (39 == i)
+			*(vol + 39) = *(vol + 39) + *(vol + 40);
+		else if (41 == i)
+			*(vol + 41) = *(vol + 41) + *(vol + 42);
+		else if (43 == i)
+			*(vol + 43) = *(vol + 43) + *(vol + 44);
+		else if (45 == i)
+			*(vol + 45) = *(vol + 45) + *(vol + 46);
+		else if (47 == i)
+			*(vol + 47) = *(vol + 47) + *(vol + 48);
+		else if (49 == i)
+			*(vol + 49) = *(vol + 49) + *(vol + 50);
+		else if (51 == i)
+			*(vol + 51) = *(vol + 51) + *(vol + 52);
+		else if (53 == i)
+			*(vol + 53) = *(vol + 53) + *(vol + 54);
+		else if (55 == i)
+			*(vol + 55) = *(vol + 55) + *(vol + 56);
+		else if (70 == i)
+			*(vol + 70) = *(vol + 70) + *(vol + 71);
+		else if (72 == i)
+			*(vol + 72) = *(vol + 72) + *(vol + 73);
+		else if (74 == i)
+		{
+			*(vol + 74) = 0;
+		}
+		else if (75 == i)
+			*(vol + 75) = *(vol + 75) + *(vol + 74);
+		else if (76 == i)
+			*(vol + 76) = *(vol + 76) + *(vol + 77);
+		else if (78 == i)
+			*(vol + 78) = *(vol + 78) + *(vol + 79);
+		else if (80 == i)
+			*(vol + 80) = *(vol + 80) + *(vol + 81);
+		else if (82 == i)
+			*(vol + 82) = *(vol + 82) + *(vol + 83);
+		else if (84 == i)
+			*(vol + 84) = *(vol + 84) + *(vol + 85);
+		else if (87 == i)
+			*(vol + 87) = *(vol + 87) + *(vol + 88);
+		else if (89 == i)
+			*(vol + 89) = *(vol + 89) + *(vol + 90);
+		else if (92 == i)
+			*(vol + 92) = *(vol + 92) + *(vol + 93);
+		else if (137 == i)
+			*(vol + 137) = *(vol + 137) + *(vol + 138);
+	}
+
+	namerefvol.organcount = 0;
+	for (int i = 0; i < 500; i++)
+	{
+		if (0 != *(vol + i))
+		{
+			*(namerefvol.name + namerefvol.organcount) = i;
+			*(namerefvol.vol + namerefvol.organcount) = *(vol + i);
+
+			namerefvol.organcount++;
+		}
+	}
+
+	delete[]vol;
 }
 
-// Store ObjGeo but use C based language
+// Store ObjGeo
 int storeGeo(std::string objfilepath, ObjGeo& objgeo) {
 	std::ifstream filein;
 	char* objfilepathchartmp = new char[500];
