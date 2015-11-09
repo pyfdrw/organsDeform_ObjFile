@@ -250,7 +250,7 @@ void deformFunction(string WORKDIR , NameRefvol namevol) {
 		ss << *(namevol.name + i);
 		ss >> filename;
 		objfilepath = WORKDIR + filename + ".obj";
-		std::cout << filename + ".obj    " << std::endl;
+		std::cout << filename + ".obj    "; //<< std::endl;
 		filetmp = storeGeo(objfilepath, objgeo);
 		if (1 == filetmp) {      //file not found
 			continue;
@@ -260,6 +260,7 @@ void deformFunction(string WORKDIR , NameRefvol namevol) {
 		geoOutput(OUTPUTDIR + filename + ".obj", objgeo);
 
 		objgeo.freeObjGeo();
+		std::cout << std::endl;
 
 	}
 
@@ -308,7 +309,7 @@ float organDeform(ObjGeo &objgeo, float singlevol) {
 
 	minans = (maxx - minx) < (maxy - miny) ? (maxx - minx) : (maxy - miny);
 	minans = minans < (maxz - minz) ? minans : (maxz - minz);
-
+	// std::cout << minans;
 
 	float adddirection = 1;  //记录使平移增加的方向，外扩增加为1，内缩增加为-1
 	objgeo += 0.05;
@@ -316,7 +317,7 @@ float organDeform(ObjGeo &objgeo, float singlevol) {
 	if (voltmp >= vol) {
 		adddirection = 0.5;
 	} else {
-		adddirection = -(0.5 < minans ? 0.5 : minans);
+		adddirection = -(0.3 < minans ? 0.3 : minans);
 	}
 	objgeo += -0.05;
 
@@ -351,9 +352,13 @@ float organDeform(ObjGeo &objgeo, float singlevol) {
 			printf("%s", "Waring ");
 		}
 
-		if (movenow < -0.1)
+		if (movenow < -0.2)
 		{
-			printf("%s", "too huge reduce length!  ");
+			printf("%s", "too huge reduce length!, Try to deform using uniform scale factor\n");
+			//objgeo += -movenow; //还原
+			//movenow = organDeformUniformScle(objgeo, singlevol);
+			//std::cout << movenow << "===";
+			//movenow = -100;    //-100 代表统一尺寸的缩放
 		}
 
 		return movenow;
@@ -384,6 +389,42 @@ float organDeform(ObjGeo &objgeo, float singlevol) {
 
 		return movenow;
 	}
+}
+
+float organDeformUniformScle(ObjGeo &objgeo, float singlevol)
+{
+	Point centrepointbef(0, 0, 0);
+	Point centrepointaft(0, 0, 0);
+	centrepointbef = objgeo.centerpointCal();
+
+	float factormax = 5;
+	float factormin = 0.00001;
+	float factornow = 1;
+	float voltmp = 0;
+	voltmp = fabs(objgeo.geoVolCal());
+	while (abs((voltmp - singlevol) / singlevol) > 0.0001)
+	{
+		if (voltmp > singlevol) // 缩放因子太大了
+		{
+			objgeo = objgeo * (1.0 / factornow);
+			factormax = factornow;
+			factornow = (factormax + factormin) / 2;
+		}
+		else
+		{
+			objgeo = objgeo * (1.0 / factornow);
+			factormin = factornow;
+			factornow = (factormax + factormin) / 2;
+		}
+		objgeo = objgeo * factornow;
+		voltmp = fabs(objgeo.geoVolCal());
+	} 
+	
+	objgeo.vnRebuild();
+	centrepointaft = objgeo.centerpointCal();
+	objgeo.dirMove(centrepointaft - centrepointbef);  //中心点保持一致
+
+	return factornow;
 }
 
 void geoOutput(string outfilepath, ObjGeo& objgeo) {
@@ -425,4 +466,24 @@ void geoOutput(string outfilepath, ObjGeo& objgeo) {
 	//fileout.clear();
 	delete[]outfilepathchartmp;
 	fileout.close();
+}
+
+Point &vectorCross(Point &A, Point &B)
+{
+	Point C; //c = A x B
+	C.setcoorX(A.getcoorY() * B.getcoorZ() - A.getcoorZ() * B.getcoorY());
+	C.setcoorY(A.getcoorZ() * B.getcoorX() - A.getcoorX() * B.getcoorZ());
+	C.setcoorZ(A.getcoorX() * B.getcoorY() - A.getcoorY() * B.getcoorX());
+
+	return C;
+}
+
+float vectorDot(Point &A, Point &B)
+{
+	float dotans = 0;
+	dotans = A.getcoorX() * B.getcoorX() +
+		A.getcoorY() * B.getcoorY() +
+		A.getcoorZ() * B.getcoorZ();
+
+	return dotans;
 }

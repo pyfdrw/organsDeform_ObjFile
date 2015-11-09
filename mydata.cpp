@@ -49,6 +49,13 @@ Point::Point()
 	coorZ_ = 0;
 	//count = 0;
 }
+
+Point::Point(float coorX, float coorY, float coorZ)
+{
+	coorX_ = coorX;
+	coorY_ = coorY;
+	coorZ_ = coorZ;
+}
 float Point::getcoorX()
 {
 	return coorX_;
@@ -74,6 +81,56 @@ void Point::setcoorZ(float coorZ)
 	coorZ_ = coorZ;
 }
 
+Point& Point::operator-(Point &B)
+{
+	return Point(this->coorX_ - B.getcoorX(), this->coorY_ - B.getcoorY(), this->coorZ_ - B.getcoorZ());
+}
+Point& Point::operator+(Point &B)
+{
+	Point C;
+	C.setcoorX(this->coorX_ + B.getcoorX());
+	C.setcoorY(this->coorY_ + B.getcoorY());
+	C.setcoorZ(this->coorZ_ + B.getcoorZ());
+
+	return C;
+}
+
+Point& Point::operator/(float divisor)
+{
+	Point C;
+	C.setcoorX(this->coorX_ / divisor);
+	C.setcoorY(this->coorY_ / divisor);
+	C.setcoorZ(this->coorZ_ / divisor);
+
+	return C;
+}
+
+Point& Point::operator*(float multiplier)
+{
+	Point C;
+	C.setcoorX(this->coorX_ * multiplier);
+	C.setcoorY(this->coorY_ * multiplier);
+	C.setcoorZ(this->coorZ_ * multiplier);
+
+	return C;
+}
+
+Point& ObjGeo::centerpointCal()
+{
+	Point centerpoint(0,0,0);
+	for (int i = 0; i < facecount; i++)
+	{
+		centerpoint = centerpoint + 
+			*(point + (face + i)->getpointAindex()) + 
+			*(point + (face + i)->getpointBindex()) + 
+			*(point + (face + i)->getpointCindex());
+	}
+
+	centerpoint = centerpoint / (3 * facecount);
+
+	return centerpoint;
+}
+
 ObjGeo::ObjGeo()
 {
 	face = 0;
@@ -93,7 +150,7 @@ ObjGeo::ObjGeo(ObjGeo &objgeoCOPY)
 	pointcount = objgeoCOPY.pointcount;
 	vncount = objgeoCOPY.vncount;
 
-	for (int i = 1; i <= objgeoCOPY.facecount; i++)
+	for (int i = 0; i < objgeoCOPY.facecount; i++)
 	{
 		(face + i)->setpointAindex((objgeoCOPY.face + i)->getpointAindex());
 		(face + i)->setpointBindex((objgeoCOPY.face + i)->getpointBindex());
@@ -107,7 +164,7 @@ ObjGeo::ObjGeo(ObjGeo &objgeoCOPY)
 		(point + i)->setcoorZ((objgeoCOPY.point + i)->getcoorZ());
 	}
 
-	for (int i = 0; i < objgeoCOPY.vncount; i++)
+	for (int i = 1; i <= objgeoCOPY.vncount; i++)
 	{
 		(pointnormal + i)->setcoorX((objgeoCOPY.pointnormal + i)->getcoorX());
 		(pointnormal + i)->setcoorY((objgeoCOPY.pointnormal + i)->getcoorY());
@@ -207,6 +264,40 @@ double ObjGeo::geoVolCal()
 	return geovol;
 }
 
+int ObjGeo::vnRebuild()
+{
+	if (pointcount <= 0)
+	{
+		return 1;
+	}
+	for (int i = 1; i <= vncount; i++)
+	{
+		*(pointnormal + i) = *(pointnormal + i) * 0;
+	}
+	for (int i = 0; i < facecount; i++)
+	{
+		Point A = Point((point + (face + i)->getpointAindex())->getcoorX(), (point + (face + i)->getpointAindex())->getcoorY(), (point + (face + i)->getpointAindex())->getcoorZ());
+		Point B = Point((point + (face + i)->getpointBindex())->getcoorX(), (point + (face + i)->getpointBindex())->getcoorY(), (point + (face + i)->getpointBindex())->getcoorZ());
+		Point C = Point((point + (face + i)->getpointCindex())->getcoorX(), (point + (face + i)->getpointCindex())->getcoorY(), (point + (face + i)->getpointCindex())->getcoorZ());
+		Point AB = B - A;
+		Point AC = C - A;
+
+		Point facenormaltmp = (vectorCross(AB, AC) / sqrt(vectorDot(AB, AC))); //面单位法向量
+		
+		// 面的三个顶点加上该面的法向量
+		*(pointnormal + (face + i)->getpointAindex()) = *(pointnormal + (face + i)->getpointAindex()) + facenormaltmp;
+		*(pointnormal + (face + i)->getpointBindex()) = *(pointnormal + (face + i)->getpointBindex()) + facenormaltmp;
+		*(pointnormal + (face + i)->getpointCindex()) = *(pointnormal + (face + i)->getpointCindex()) + facenormaltmp;
+	}
+
+	for (int i = 1; i <= vncount; i++)
+	{
+		*(pointnormal + i) = *(pointnormal + i) / sqrt(vectorDot(*(pointnormal + i), *(pointnormal + i)));
+	}
+
+	return 0;
+}
+
 //void ObjGeo::geoVertexMove(float length)
 //{
 //	for (int i = 1; i <= this->pointcount; i++)
@@ -239,6 +330,26 @@ ObjGeo& ObjGeo::operator+(float length)
 	}
 
 	return *this;
+}
+
+ObjGeo& ObjGeo::operator*(float factornow)
+{
+	for (int i = 1; i <= this->pointcount; i++)
+	{
+		//(this->point + i)->setcoorX(((this->point + i)->getcoorX() * factornow));
+		(this->point + i)->setcoorY(((this->point + i)->getcoorY() * factornow));
+		//(this->point + i)->setcoorZ(((this->point + i)->getcoorZ() * factornow));
+	}
+
+	return *this;
+}
+
+void ObjGeo::dirMove(Point direction)
+{
+	for (int i = 1; i <= pointcount; i++)
+	{
+		*(point + i) = *(point + i) + direction;
+	}
 }
 
 void ObjGeo::freeObjGeo()
