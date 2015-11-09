@@ -1,6 +1,32 @@
-﻿生成启动时间为 2015/11/8 20:06:40。
+﻿生成启动时间为 2015/11/9 15:38:00。
      1>项目“E:\MyOriginalCodes\GITProjects\organsDeform_ObjFile\organsDeform.vcxproj”在节点 2 上(Build 个目标)。
-     1>Link:
+     1>ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"Debug\\" /Fd"Debug\vc140.pdb" /Gd /TP /analyze- /errorReport:prompt function.cpp
+         function.cpp
+     1>e:\myoriginalcodes\gitprojects\organsdeform_objfile\function.cpp(43): warning C4996: 'sscanf': This function or variable may be unsafe. Consider using sscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+         c:\program files (x86)\windows kits\10\include\10.0.10150.0\ucrt\stdio.h(2254): note: 参见“sscanf”的声明
+     1>e:\myoriginalcodes\gitprojects\organsdeform_objfile\function.cpp(59): warning C4018: “<”: 有符号/无符号不匹配
+     1>e:\myoriginalcodes\gitprojects\organsdeform_objfile\function.cpp(195): warning C4244: “初始化”: 从“std::streamoff”转换到“int”，可能丢失数据
+     1>e:\myoriginalcodes\gitprojects\organsdeform_objfile\function.cpp(203): warning C4996: 'sscanf': This function or variable may be unsafe. Consider using sscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+         c:\program files (x86)\windows kits\10\include\10.0.10150.0\ucrt\stdio.h(2254): note: 参见“sscanf”的声明
+     1>e:\myoriginalcodes\gitprojects\organsdeform_objfile\function.cpp(210): warning C4996: 'sscanf': This function or variable may be unsafe. Consider using sscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+         c:\program files (x86)\windows kits\10\include\10.0.10150.0\ucrt\stdio.h(2254): note: 参见“sscanf”的声明
+     1>e:\myoriginalcodes\gitprojects\organsdeform_objfile\function.cpp(217): warning C4996: 'sscanf': This function or variable may be unsafe. Consider using sscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+         c:\program files (x86)\windows kits\10\include\10.0.10150.0\ucrt\stdio.h(2254): note: 参见“sscanf”的声明
+     1>e:\myoriginalcodes\gitprojects\organsdeform_objfile\function.cpp(247): warning C4018: “<”: 有符号/无符号不匹配
+     1>e:\myoriginalcodes\gitprojects\organsdeform_objfile\function.cpp(280): warning C4018: “<”: 有符号/无符号不匹配
+     1>e:\myoriginalcodes\gitprojects\organsdeform_objfile\function.cpp(290): warning C4244: “初始化”: 从“double”转换到“float”，可能丢失数据
+     1>e:\myoriginalcodes\gitprojects\organsdeform_objfile\function.cpp(297): warning C4018: “<”: 有符号/无符号不匹配
+     1>e:\myoriginalcodes\gitprojects\organsdeform_objfile\function.cpp(314): warning C4305: “参数”: 从“double”到“float”截断
+     1>e:\myoriginalcodes\gitprojects\organsdeform_objfile\function.cpp(315): warning C4244: “初始化”: 从“double”转换到“float”，可能丢失数据
+     1>e:\myoriginalcodes\gitprojects\organsdeform_objfile\function.cpp(319): warning C4244: “=”: 从“double”转换到“float”，可能丢失数据
+     1>e:\myoriginalcodes\gitprojects\organsdeform_objfile\function.cpp(321): warning C4305: “参数”: 从“double”到“float”截断
+     1>e:\myoriginalcodes\gitprojects\organsdeform_objfile\function.cpp(334): warning C4244: “初始化”: 从“double”转换到“float”，可能丢失数据
+     1>e:\myoriginalcodes\gitprojects\organsdeform_objfile\function.cpp(365): warning C4244: “初始化”: 从“double”转换到“float”，可能丢失数据
+     1>e:\myoriginalcodes\gitprojects\organsdeform_objfile\function.cpp(403): warning C4018: “<=”: 有符号/无符号不匹配
+     1>e:\myoriginalcodes\gitprojects\organsdeform_objfile\function.cpp(410): warning C4018: “<=”: 有符号/无符号不匹配
+     1>e:\myoriginalcodes\gitprojects\organsdeform_objfile\function.cpp(417): warning C4018: “<”: 有符号/无符号不匹配
+       Link:
          C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"E:\MyOriginalCodes\GITProjects\organsDeform_ObjFile\Debug\organsDeform.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /Debug /PDB:"E:\MyOriginalCodes\GITProjects\organsDeform_ObjFile\Debug\organsDeform.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"E:\MyOriginalCodes\GITProjects\organsDeform_ObjFile\Debug\organsDeform.lib" /MACHINE:X86 Debug\mydata.obj
          Debug\function.obj
          Debug\main.obj
@@ -9,4 +35,4 @@
 
 已成功生成。
 
-已用时间 00:00:01.49
+已用时间 00:00:01.56

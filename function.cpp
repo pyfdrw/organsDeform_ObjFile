@@ -289,15 +289,38 @@ void deformFunction(string WORKDIR , NameRefvol namevol) {
 float organDeform(ObjGeo &objgeo, float singlevol) {
 	float vol = fabs(objgeo.geoVolCal());
 
+	// 向内缩放的长度不应过长，选取不超过包围盒宽或长或高的最小值的负数作为最大向内内扩长度
+	float minx = 100000; float maxx = -100000;
+	float miny = 100000; float maxy = -100000;
+	float minz = 100000; float maxz = -100000;
+	float minans = 0;
+	for (int i = 0; i < objgeo.pointcount; i++)
+	{
+		minx = minx > (objgeo.point + i)->getcoorX() ? (objgeo.point + i)->getcoorX() : minx;
+		maxx = maxx < (objgeo.point + i)->getcoorX() ? (objgeo.point + i)->getcoorX() : maxx;
+
+		miny = miny > (objgeo.point + i)->getcoorY() ? (objgeo.point + i)->getcoorY() : miny;
+		maxy = maxy < (objgeo.point + i)->getcoorY() ? (objgeo.point + i)->getcoorY() : maxy;
+
+		minz = minz > (objgeo.point + i)->getcoorZ() ? (objgeo.point + i)->getcoorZ() : minz;
+		maxz = maxz < (objgeo.point + i)->getcoorZ() ? (objgeo.point + i)->getcoorZ() : maxz;
+	}
+
+	minans = (maxx - minx) < (maxy - miny) ? (maxx - minx) : (maxy - miny);
+	minans = minans < (maxz - minz) ? minans : (maxz - minz);
+
+
 	float adddirection = 1;  //记录使平移增加的方向，外扩增加为1，内缩增加为-1
 	objgeo += 0.05;
 	float voltmp = fabs(objgeo.geoVolCal());
 	if (voltmp >= vol) {
 		adddirection = 0.5;
 	} else {
-		adddirection = -0.5;
+		adddirection = -(0.5 < minans ? 0.5 : minans);
 	}
 	objgeo += -0.05;
+
+	std::cout << "max move length " << std::setw(5) << std::right << adddirection << "   ";
 
 	float movemax = adddirection;
 	float movemin = -adddirection;  //最多平移的距离,movemax体积增大最大平移距离，movemin体积缩小最大平移距离
@@ -328,6 +351,11 @@ float organDeform(ObjGeo &objgeo, float singlevol) {
 			printf("%s", "Waring ");
 		}
 
+		if (movenow < -0.1)
+		{
+			printf("%s", "too huge reduce length!  ");
+		}
+
 		return movenow;
 	} else { //应该增大体积
 		movenow = movemax / 2;
@@ -350,8 +378,8 @@ float organDeform(ObjGeo &objgeo, float singlevol) {
 
 		if ((movemax - movemin) <= 0.00001) {
 			objgeo += movenow;
-			//printf("%s", "Waring ");
-			std::cout << "Waring " << std::endl;
+			printf("%s", "Waring ");
+			//std::cout << "Waring " << std::endl;
 		}
 
 		return movenow;
@@ -373,21 +401,21 @@ void geoOutput(string outfilepath, ObjGeo& objgeo) {
 
 	fileout << "#Rhino\n" << std::endl;
 	for (int i = 1; i <= objgeo.pointcount; i++) {         // 顶点输出
-		fileout << "v " << std::setprecision(13) << std::setw(20) << std::right
-		        << (objgeo.point + i)->getcoorX() << ' '
-		        << (objgeo.point + i)->getcoorY() << ' '
+		fileout << "v " << std::setprecision(13) << std::setw(20) << std::left
+		        << (objgeo.point + i)->getcoorX() << ' ' << std::setw(20) << std::left
+		        << (objgeo.point + i)->getcoorY() << ' ' << std::setw(20) << std::left
 		        << (objgeo.point + i)->getcoorZ() << std::endl;      // 浮点数以小数后13位的精度输出
 	}
 
-	for (int i = 1; i <= objgeo.vncount; i++) {         // 顶点法方向输出
-		fileout << "vn " << std::setprecision(13) << std::setw(20) << std::right
-		        << (objgeo.pointnormal + i)->getcoorX() << ' '
-		        << (objgeo.pointnormal + i)->getcoorY() << ' '
+	for (int i = 1; i <= objgeo.vncount; i++) {           // 顶点法方向输出
+		fileout << "vn " << std::setprecision(13) << std::setw(20) << std::left
+		        << (objgeo.pointnormal + i)->getcoorX() << ' ' << std::setw(20) << std::left
+		        << (objgeo.pointnormal + i)->getcoorY() << ' ' << std::setw(20) << std::left
 		        << (objgeo.pointnormal + i)->getcoorZ() << std::endl;      // 浮点数以小数后13位的精度输出
 	}
 
-	for (int i = 0; i < objgeo.facecount; i++) {         // 面输出
-		fileout << "f " << std::setprecision(13) << std::right
+	for (int i = 0; i < objgeo.facecount; i++) {          // 面输出
+		fileout << "f " << std::left
 		        << (objgeo.face + i)->getpointAindex() << "//" << (objgeo.face + i)->getpointAindex() << ' '
 		        << (objgeo.face + i)->getpointBindex() << "//" << (objgeo.face + i)->getpointBindex() << ' '
 		        << (objgeo.face + i)->getpointCindex() << "//" << (objgeo.face + i)->getpointCindex() << ' '
