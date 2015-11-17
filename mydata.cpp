@@ -261,7 +261,7 @@ double ObjGeo::geoVolCal()
 		geovol += 1.0 / 6 * (D.getcoorX() * C.getcoorX() + D.getcoorY() * C.getcoorY() + D.getcoorZ() * C.getcoorZ());
 	}
 
-	return geovol;
+	return -geovol;
 }
 
 int ObjGeo::vnRebuild()
@@ -367,9 +367,19 @@ void ObjGeo::freeObjGeo()
 
 //ObjGeo::~ObjGeo()
 //{
-//	delete[]point;
-//	delete[]face;
-//	delete[]pointnormal;
+//	if (0 != point)
+//	{
+//		delete[]point;
+//	}
+//	if (0 != face)
+//	{
+//		delete[]face;
+//	}
+//	if (0 != pointnormal)
+//	{
+//		delete[]pointnormal;
+//	}
+//	
 //  facecount = 0;
 //  pointcount = 0;
 //  vncount = 0;

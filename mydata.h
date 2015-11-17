@@ -91,7 +91,9 @@ void storeNameRefvol(string WORKDIR, NameRefvol &namevol);
 int storeGeo(std::string objfilepath, ObjGeo& objgeo);
 void deformFunction(string WORKDIR , NameRefvol namevol);
 float organDeform(ObjGeo &objgeo, float singlevol);
+float correctmoveminFind(ObjGeo &objgeo);   //几何向内缩放的时候可能出现体积为负数的情况，需要计算最大的缩放距离
 float organDeformUniformScle(ObjGeo &objgeo, float singlevol);
+
 void geoOutput(string outfilepath, ObjGeo& objgeo);
 void NameRefvolEdit(NameRefvol &namerefvol);
 Point &vectorCross(Point &A, Point &B);   //向量叉乘

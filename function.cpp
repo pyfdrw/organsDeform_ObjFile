@@ -288,8 +288,9 @@ void deformFunction(string WORKDIR , NameRefvol namevol) {
 }
 
 float organDeform(ObjGeo &objgeo, float singlevol) {
-	float vol = fabs(objgeo.geoVolCal());
-
+	//float vol = fabs(objgeo.geoVolCal());
+	float vol = (objgeo.geoVolCal());
+	std::cout << "Initial vol = " << vol;
 	// 向内缩放的长度不应过长，选取不超过包围盒宽或长或高的最小值的负数作为最大向内内扩长度
 	float minx = 100000; float maxx = -100000;
 	float miny = 100000; float maxy = -100000;
@@ -312,8 +313,8 @@ float organDeform(ObjGeo &objgeo, float singlevol) {
 	// std::cout << minans;
 
 	float adddirection = 1;  //记录使平移增加的方向，外扩增加为1，内缩增加为-1
-	objgeo += 0.05;
-	float voltmp = fabs(objgeo.geoVolCal());
+	objgeo += 0.0001;
+	float voltmp = (objgeo.geoVolCal());
 	if (voltmp >= vol) {
 		adddirection = 0.5;
 	} else {
@@ -321,13 +322,17 @@ float organDeform(ObjGeo &objgeo, float singlevol) {
 	}
 	objgeo += -0.05;
 
-	std::cout << "max move length " << std::setw(5) << std::right << adddirection << "   ";
+	//std::cout << "max move length " << std::setw(5) << std::right << adddirection << "   ";
 
 	float movemax = adddirection;
 	float movemin = -adddirection;  //最多平移的距离,movemax体积增大最大平移距离，movemin体积缩小最大平移距离
 	float movenow = 0;
 
-	if (vol >= singlevol) { //应该缩小体积
+	if (vol >= singlevol) { //应该缩小体积, 注意体积出现负数的情况
+
+		//find correct movemin
+		movemin = correctmoveminFind(objgeo);
+		std::cout << '\n' << "movemin = " << movemin << std::endl;
 		movemax = 0;
 		movenow = movemin / 2;
 		while ((movemax - movemin) > 0.00001) { //防止死循环
@@ -389,6 +394,35 @@ float organDeform(ObjGeo &objgeo, float singlevol) {
 
 		return movenow;
 	}
+}
+
+float correctmoveminFind(ObjGeo &objgeo)
+{
+	//ObjGeo objgeotmp = objgeo;
+
+	float kmin = - 0.5;
+	float kmax = 0;
+	float know = - 0.25;
+	
+	while ((kmax - kmin) > 0.0001)
+	{
+		objgeo += know;
+		if (objgeo.geoVolCal() > 0)
+		{
+			objgeo += -know;
+			kmax = know;
+			know = (kmax + kmin) / 2;
+		}
+		else
+		{
+			objgeo += -know;
+			kmin = know;
+			know = (kmax + kmin) / 2;
+		}
+	}
+
+	//objgeotmp.freeObjGeo();
+	return kmax;
 }
 
 float organDeformUniformScle(ObjGeo &objgeo, float singlevol)
