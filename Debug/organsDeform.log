@@ -1,4 +1,4 @@
-﻿生成启动时间为 2015/11/11 21:44:40。
+﻿生成启动时间为 2015/12/1 0:35:57。
      1>项目“E:\MyOriginalCodes\GITProjects\organsDeform_ObjFile\organsDeform.vcxproj”在节点 2 上(Build 个目标)。
      1>ClCompile:
          C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"Debug\\" /Fd"Debug\vc140.pdb" /Gd /TP /analyze- /errorReport:prompt function.cpp
@@ -17,21 +17,20 @@
      1>e:\myoriginalcodes\gitprojects\organsdeform_objfile\function.cpp(281): warning C4018: “<”: 有符号/无符号不匹配
      1>e:\myoriginalcodes\gitprojects\organsdeform_objfile\function.cpp(292): warning C4244: “初始化”: 从“double”转换到“float”，可能丢失数据
      1>e:\myoriginalcodes\gitprojects\organsdeform_objfile\function.cpp(299): warning C4018: “<”: 有符号/无符号不匹配
-     1>e:\myoriginalcodes\gitprojects\organsdeform_objfile\function.cpp(316): warning C4305: “参数”: 从“double”到“float”截断
-     1>e:\myoriginalcodes\gitprojects\organsdeform_objfile\function.cpp(317): warning C4244: “初始化”: 从“double”转换到“float”，可能丢失数据
-     1>e:\myoriginalcodes\gitprojects\organsdeform_objfile\function.cpp(321): warning C4244: “=”: 从“double”转换到“float”，可能丢失数据
-     1>e:\myoriginalcodes\gitprojects\organsdeform_objfile\function.cpp(323): warning C4305: “参数”: 从“double”到“float”截断
-     1>e:\myoriginalcodes\gitprojects\organsdeform_objfile\function.cpp(340): warning C4244: “初始化”: 从“double”转换到“float”，可能丢失数据
-     1>e:\myoriginalcodes\gitprojects\organsdeform_objfile\function.cpp(375): warning C4244: “初始化”: 从“double”转换到“float”，可能丢失数据
-     1>e:\myoriginalcodes\gitprojects\organsdeform_objfile\function.cpp(435): warning C4305: “初始化”: 从“double”到“float”截断
-     1>e:\myoriginalcodes\gitprojects\organsdeform_objfile\function.cpp(438): warning C4244: “=”: 从“double”转换到“float”，可能丢失数据
-     1>e:\myoriginalcodes\gitprojects\organsdeform_objfile\function.cpp(443): warning C4244: “参数”: 从“double”转换到“float”，可能丢失数据
+     1>e:\myoriginalcodes\gitprojects\organsdeform_objfile\function.cpp(316): warning C4305: “初始化”: 从“double”到“float”截断
+     1>e:\myoriginalcodes\gitprojects\organsdeform_objfile\function.cpp(318): warning C4244: “初始化”: 从“double”转换到“float”，可能丢失数据
+     1>e:\myoriginalcodes\gitprojects\organsdeform_objfile\function.cpp(322): warning C4244: “=”: 从“double”转换到“float”，可能丢失数据
+     1>e:\myoriginalcodes\gitprojects\organsdeform_objfile\function.cpp(341): warning C4244: “初始化”: 从“double”转换到“float”，可能丢失数据
+     1>e:\myoriginalcodes\gitprojects\organsdeform_objfile\function.cpp(381): warning C4244: “初始化”: 从“double”转换到“float”，可能丢失数据
+     1>e:\myoriginalcodes\gitprojects\organsdeform_objfile\function.cpp(441): warning C4305: “初始化”: 从“double”到“float”截断
+     1>e:\myoriginalcodes\gitprojects\organsdeform_objfile\function.cpp(444): warning C4244: “=”: 从“double”转换到“float”，可能丢失数据
      1>e:\myoriginalcodes\gitprojects\organsdeform_objfile\function.cpp(449): warning C4244: “参数”: 从“double”转换到“float”，可能丢失数据
-     1>e:\myoriginalcodes\gitprojects\organsdeform_objfile\function.cpp(454): warning C4244: “=”: 从“double”转换到“float”，可能丢失数据
-     1>e:\myoriginalcodes\gitprojects\organsdeform_objfile\function.cpp(478): warning C4018: “<=”: 有符号/无符号不匹配
-     1>e:\myoriginalcodes\gitprojects\organsdeform_objfile\function.cpp(485): warning C4018: “<=”: 有符号/无符号不匹配
-     1>e:\myoriginalcodes\gitprojects\organsdeform_objfile\function.cpp(492): warning C4018: “<”: 有符号/无符号不匹配
-     1>e:\myoriginalcodes\gitprojects\organsdeform_objfile\function.cpp(512): warning C4172: 返回局部变量或临时变量的地址: C
+     1>e:\myoriginalcodes\gitprojects\organsdeform_objfile\function.cpp(455): warning C4244: “参数”: 从“double”转换到“float”，可能丢失数据
+     1>e:\myoriginalcodes\gitprojects\organsdeform_objfile\function.cpp(460): warning C4244: “=”: 从“double”转换到“float”，可能丢失数据
+     1>e:\myoriginalcodes\gitprojects\organsdeform_objfile\function.cpp(484): warning C4018: “<=”: 有符号/无符号不匹配
+     1>e:\myoriginalcodes\gitprojects\organsdeform_objfile\function.cpp(491): warning C4018: “<=”: 有符号/无符号不匹配
+     1>e:\myoriginalcodes\gitprojects\organsdeform_objfile\function.cpp(498): warning C4018: “<”: 有符号/无符号不匹配
+     1>e:\myoriginalcodes\gitprojects\organsdeform_objfile\function.cpp(518): warning C4172: 返回局部变量或临时变量的地址: C
        Link:
          C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"E:\MyOriginalCodes\GITProjects\organsDeform_ObjFile\Debug\organsDeform.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /Debug /PDB:"E:\MyOriginalCodes\GITProjects\organsDeform_ObjFile\Debug\organsDeform.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"E:\MyOriginalCodes\GITProjects\organsDeform_ObjFile\Debug\organsDeform.lib" /MACHINE:X86 Debug\mydata.obj
          Debug\function.obj
@@ -41,4 +40,4 @@
 
 已成功生成。
 
-已用时间 00:00:01.43
+已用时间 00:00:01.21

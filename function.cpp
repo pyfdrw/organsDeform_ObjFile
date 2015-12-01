@@ -313,14 +313,15 @@ float organDeform(ObjGeo &objgeo, float singlevol) {
 	// std::cout << minans;
 
 	float adddirection = 1;  //记录使平移增加的方向，外扩增加为1，内缩增加为-1
-	objgeo += 0.0001;
+	float trylength = 0.001;
+	objgeo += trylength;
 	float voltmp = (objgeo.geoVolCal());
 	if (voltmp >= vol) {
 		adddirection = 0.5;
 	} else {
 		adddirection = -(0.3 < minans ? 0.3 : minans);
 	}
-	objgeo += -0.05;
+	objgeo += -trylength;
 
 	//std::cout << "max move length " << std::setw(5) << std::right << adddirection << "   ";
 
@@ -338,7 +339,7 @@ float organDeform(ObjGeo &objgeo, float singlevol) {
 		while ((movemax - movemin) > 0.00001) { //防止死循环
 			objgeo += movenow;
 			float voltmp = fabs(objgeo.geoVolCal());
-			if (fabs(voltmp - singlevol) / singlevol < 0.001) { //相对误差小于0.1%
+			if (fabs(voltmp - singlevol) / singlevol < 0.0001) { //相对误差小于0.01%
 				break;
 			} else if (voltmp >= singlevol) { //movenow不够长
 				objgeo += -movenow;
@@ -354,7 +355,7 @@ float organDeform(ObjGeo &objgeo, float singlevol) {
 
 		if ((movemax - movemin) <= 0.00001) {
 			objgeo += movenow;
-			printf("%s", "Waring ");
+			printf("%s", "----Waring---- ");
 		}
 
 		if (movenow < -0.2)
@@ -366,6 +367,11 @@ float organDeform(ObjGeo &objgeo, float singlevol) {
 			//movenow = -100;    //-100 代表统一尺寸的缩放
 		}
 
+		if (abs(objgeo.geoVolCal() - singlevol)/ singlevol > 0.001)
+		{
+			std::cout << "------Volume wrong----------" << std::endl;
+		}
+
 		return movenow;
 	} else { //应该增大体积
 		movenow = movemax / 2;
@@ -373,7 +379,7 @@ float organDeform(ObjGeo &objgeo, float singlevol) {
 		while ((movemax - movemin) > 0.00001) {
 			objgeo += movenow;
 			float voltmp = fabs(objgeo.geoVolCal());
-			if (fabs(voltmp - singlevol) / singlevol < 0.001) { //相对误差小于0.1%
+			if (fabs(voltmp - singlevol) / singlevol < 0.0001) { //相对误差小于0.01%
 				break;
 			} else if (voltmp >= singlevol) { //movenow太长
 				objgeo += -movenow;
@@ -388,7 +394,7 @@ float organDeform(ObjGeo &objgeo, float singlevol) {
 
 		if ((movemax - movemin) <= 0.00001) {
 			objgeo += movenow;
-			printf("%s", "Waring ");
+			printf("%s", "\n----Waring---- ");
 			//std::cout << "Waring " << std::endl;
 		}
 
@@ -476,16 +482,16 @@ void geoOutput(string outfilepath, ObjGeo& objgeo) {
 
 	fileout << "#Rhino\n" << std::endl;
 	for (int i = 1; i <= objgeo.pointcount; i++) {         // 顶点输出
-		fileout << "v " << std::setprecision(13) << std::setw(20) << std::left
-		        << (objgeo.point + i)->getcoorX() << ' ' << std::setw(20) << std::left
-		        << (objgeo.point + i)->getcoorY() << ' ' << std::setw(20) << std::left
+		fileout << "v " << std::setprecision(16) << std::left
+		        << (objgeo.point + i)->getcoorX() << ' ' << std::left
+		        << (objgeo.point + i)->getcoorY() << ' ' << std::left
 		        << (objgeo.point + i)->getcoorZ() << std::endl;      // 浮点数以小数后13位的精度输出
 	}
 
 	for (int i = 1; i <= objgeo.vncount; i++) {           // 顶点法方向输出
-		fileout << "vn " << std::setprecision(13) << std::setw(20) << std::left
-		        << (objgeo.pointnormal + i)->getcoorX() << ' ' << std::setw(20) << std::left
-		        << (objgeo.pointnormal + i)->getcoorY() << ' ' << std::setw(20) << std::left
+		fileout << "vn " << std::setprecision(16) << std::left
+		        << (objgeo.pointnormal + i)->getcoorX() << ' ' << std::left
+		        << (objgeo.pointnormal + i)->getcoorY() << ' ' << std::left
 		        << (objgeo.pointnormal + i)->getcoorZ() << std::endl;      // 浮点数以小数后13位的精度输出
 	}
 
